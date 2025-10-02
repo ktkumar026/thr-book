@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz Tool</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      color: #333;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    .quiz-container {
+      width: 80%;
+      max-width: 700px;
+      background: #fff;
+      margin: 30px auto;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+    }
+    h1 {
+      color: #d63384;
+    }
+    .question {
+      margin: 20px 0;
+      font-weight: bold;
+    }
+    .options label {
+      display: block;
+      background: #f1f1f1;
+      margin: 8px 0;
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .options input {
+      margin-right: 8px;
+    }
+    .options label:hover {
+      background: #ffe0f0;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border: none;
+      background: #d63384;
+      color: white;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #b02068;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>Quiz Tool</h1>
+    <form id="quizForm">
+      <div class="question">1. What is the capital of France?</div>
+      <div class="options">
+        <label><input type="radio" name="q1" value="Paris"> Paris</label>
+        <label><input type="radio" name="q1" value="London"> London</label>
+        <label><input type="radio" name="q1" value="Rome"> Rome</label>
+      </div>
+
+      <div class="question">2. Which planet is known as the Red Planet?</div>
+      <div class="options">
+        <label><input type="radio" name="q2" value="Mars"> Mars</label>
+        <label><input type="radio" name="q2" value="Jupiter"> Jupiter</label>
+        <label><input type="radio" name="q2" value="Venus"> Venus</label>
+      </div>
+
+      <div class="question">3. Who wrote "Hamlet"?</div>
+      <div class="options">
+        <label><input type="radio" name="q3" value="Shakespeare"> William Shakespeare</label>
+        <label><input type="radio" name="q3" value="Homer"> Homer</label>
+        <label><input type="radio" name="q3" value="Tolstoy"> Leo Tolstoy</label>
+      </div>
+
+      <div class="question">4. What is the largest ocean on Earth?</div>
+      <div class="options">
+        <label><input type="radio" name="q4" value="Pacific"> Pacific Ocean</label>
+        <label><input type="radio" name="q4" value="Atlantic"> Atlantic Ocean</label>
+        <label><input type="radio" name="q4" value="Indian"> Indian Ocean</label>
+      </div>
+
+      <div class="question">5. What is the boiling point of water at sea level?</div>
+      <div class="options">
+        <label><input type="radio" name="q5" value="100"> 100°C</label>
+        <label><input type="radio" name="q5" value="90"> 90°C</label>
+        <label><input type="radio" name="q5" value="80"> 80°C</label>
+      </div>
+
+      <div class="question">6. Who painted the Mona Lisa?</div>
+      <div class="options">
+        <label><input type="radio" name="q6" value="DaVinci"> Leonardo da Vinci</label>
+        <label><input type="radio" name="q6" value="VanGogh"> Vincent van Gogh</label>
+        <label><input type="radio" name="q6" value="Picasso"> Pablo Picasso</label>
+      </div>
+
+      <div class="question">7. Which gas do plants absorb for photosynthesis?</div>
+      <div class="options">
+        <label><input type="radio" name="q7" value="CO2"> Carbon Dioxide</label>
+        <label><input type="radio" name="q7" value="O2"> Oxygen</label>
+        <label><input type="radio" name="q7" value="N2"> Nitrogen</label>
+      </div>
+
+      <div class="question">8. What is the currency of Japan?</div>
+      <div class="options">
+        <label><input type="radio" name="q8" value="Yen"> Yen</label>
+        <label><input type="radio" name="q8" value="Dollar"> Dollar</label>
+        <label><input type="radio" name="q8" value="Won"> Won</label>
+      </div>
+
+      <div class="question">9. Which is the smallest prime number?</div>
+      <div class="options">
+        <label><input type="radio" name="q9" value="2"> 2</label>
+        <label><input type="radio" name="q9" value="1"> 1</label>
+        <label><input type="radio" name="q9" value="3"> 3</label>
+      </div>
+
+      <div class="question">10. What is H2O commonly known as?</div>
+      <div class="options">
+        <label><input type="radio" name="q10" value="Water"> Water</label>
+        <label><input type="radio" name="q10" value="Oxygen"> Oxygen</label>
+        <label><input type="radio" name="q10" value="Hydrogen"> Hydrogen</label>
+      </div>
+
+      <button type="button" onclick="checkAnswers()">Submit</button>
+    </form>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function checkAnswers() {
+      const answers = {
+        q1: "Paris",
+        q2: "Mars",
+        q3: "Shakespeare",
+        q4: "Pacific",
+        q5: "100",
+        q6: "DaVinci",
+        q7: "CO2",
+        q8: "Yen",
+        q9: "2",
+        q10: "Water"
+      };
+
+      let score = 0;
+      for (let q in answers) {
+        let selected = document.querySelector(`input[name="${q}"]:checked`);
+        if (selected && selected.value === answers[q]) {
+          score++;
+        }
+      }
+
+      document.getElementById("result").innerText = 
+        `You scored ${score} out of 10.`;
+    }
+  </script>
+</body>
+</html>
